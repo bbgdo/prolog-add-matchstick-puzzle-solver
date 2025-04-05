@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.jpl7.Util.isList;
 import static spark.Spark.*;
 
 public class PrologJavaServer {
@@ -73,11 +74,11 @@ public class PrologJavaServer {
     }
 
     private static String formatPrologList(Term term) {
-        if (!org.jpl7.Util.isList(term)) return cleanValue(term.toString());
+        if (!isList(term)) return cleanValue(term.toString());
 
         StringBuilder sb = new StringBuilder();
         for (Term sublist : term.toTermArray()) {
-            if (org.jpl7.Util.isList(sublist)) {
+            if (isList(sublist)) {
                 sb.append("[");
                 for (Term item : sublist.toTermArray()) {
                     sb.append(cleanValue(item.toString()));
